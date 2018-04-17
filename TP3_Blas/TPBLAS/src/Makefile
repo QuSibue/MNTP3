@@ -7,7 +7,7 @@ LIB_DIR=../lib
 INC_DIR=../include
 
 OPTIM=-O2
-OPTIONS=-fPIC $(OPTIM) -I$(INC_DIR)
+OPTIONS=-fPIC -msse4.2 -fopenmp $(OPTIM) -I$(INC_DIR)
 
 # Bibliothèque statique
 

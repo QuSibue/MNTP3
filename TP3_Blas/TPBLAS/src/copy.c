@@ -6,7 +6,7 @@ void mncblas_scopy(const int N, const float *X, const int incX,
 {
   register unsigned int i = 0 ;
   register unsigned int j = 0 ;
-#pragma omp parallel for
+//#pragma omp parallel for
   for (; ((i < N) && (j < N)) ; i += incX, j += incY)
     {
       Y [j] = X [i] ;
@@ -20,7 +20,7 @@ void mncblas_dcopy(const int N, const double *X, const int incX,
 {
   register unsigned int i = 0 ;
   register unsigned int j = 0 ;
-#pragma omp parallel for
+//#pragma omp parallel for
   for (; ((i < N) && (j < N)) ; i += incX, j += incY)
     {
       Y [j] = X [i] ;
@@ -34,7 +34,7 @@ void mncblas_ccopy(const int N, const void *X, const int incX,
 {
   register unsigned int i = 0 ;
   register unsigned int j = 0 ;
-#pragma omp parallel for
+//#pragma omp parallel for
   for (; ((i < N) && (j < N)) ; i += incX, j += incY)
     {
       ((struct complex_simple*)Y)[j].real = ((struct complex_simple*)X)[i].real ;
@@ -49,7 +49,7 @@ void mncblas_zcopy(const int N, const void *X, const int incX,
 {
   register unsigned int i = 0 ;
   register unsigned int j = 0 ;
-#pragma omp parallel for
+//#pragma omp parallel for
   for (; ((i < N) && (j < N)) ; i += incX, j += incY)
     {
       ((struct complex_double*)Y)[j].real = ((struct complex_double*)X)[i].real ;
