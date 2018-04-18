@@ -14,8 +14,10 @@
 //===================================================DEFINITION=============================================================================================//
 vfloat vec1,blvec1,vec2,blvec2 ;
 float resultatf,resultatcs;
+float resultatf2,resultatcs2;
 vdouble vecd1,blvecd1,vecd2,blvecd1;
 double resultatd,resultatcd;
+double resultatd2,resultatcd2;
 vcsimple veccs1,blveccs1,veccs2,blveccs2;
 vcdouble veccd1,blveccd1,veccd2,blveccd1;
 double m_Flops;
@@ -41,48 +43,41 @@ int main (int argc, char **argv)
 
 printf("=========================VECTEUR FLOAT================================\n");
 
-
   start = _rdtsc () ;
      resultatf=cblas_snrm2(VECSIZE, vec1, 1) ;
   end = _rdtsc () ;
 
   m_Flops=FLOPS(1,3.4,2*VECSIZE,end-start-residu);
 
-  printf ("cblas_snrm2 nombre de cycles cblas: %Ld \n", end-start-residu) ;
+  printf ("mncblas_snrm2 nombre de cycles: %Ld \n", end-start-residu) ;
   printf ("resultat: %f\n",resultatf);
   printf ("resultat en flops : %f\n",m_Flops) ;
   printf("\n");
 
 
   start = _rdtsc () ;
-     resultatf=mncblas_snrm2(VECSIZE, blvec1, 1) ;
+     resultatf2=mncblas_snrm2_static(VECSIZE, blvec1, 1) ;
   end = _rdtsc () ;
 
   m_Flops=FLOPS(1,3.4,2*VECSIZE,end-start-residu);
 
-  printf ("mncblas_snrm2 nombre de cycles cblas: %Ld \n", end-start-residu) ;
-  printf ("resultat: %f\n",resultatf);
+  printf ("mncblas_snrm2_openmp nombre de cycles: %Ld \n", end-start-residu) ;
+  printf ("resultat: %f\n",resultatf2);
   printf ("resultat en flops : %f\n",m_Flops) ;
   printf("\n");
 
 
-  if(comparaisonVecteurFloat(vec1,VECSIZE,blvec1,VECSIZE)){
-    printf ("Résultats entre cblas et mnblas identiques\n") ;
+  if(resultatf = resultatf2){
+    printf ("Résultats entre mncblas et mnblas_openmp identiques\n") ;
   }
   else{
-    printf ("Erreurs ! Résultats entre cblas et mnblas différents\n") ;
+    printf ("Erreurs ! Résultats entre mncblas et mnblas_openmp différents\n") ;
   }
 
 
 
   printf("======================================================================\n\n");
 
-
-  /*printf ("Vector 2:\n") ;
-  vector_print (vec2) ;*/
-
-  /*printf("Vector 2 float :\n");
-  vector_print(vec2);*/
 //============================================================================================================================//
 
 
@@ -94,16 +89,6 @@ printf("=========================VECTEUR Double================================\
 
 
   start = _rdtsc () ;
-     resultatd = cblas_dnrm2 (VECSIZE, vecd1, 1) ;
-  end = _rdtsc () ;
-
-  m_Flops=FLOPS(1,3.4,2*VECSIZE,end-start-residu);
-  printf ("cblas_dasum nombre de cycles cblas: %Ld \n", end-start-residu) ;
-  printf ("resultat: %f\n",resultatd);
-  printf ("resultat en flops : %f\n",m_Flops) ;
-  printf("\n");
-
-  start = _rdtsc () ;
      resultatd = mncblas_dnrm2 (VECSIZE, vecd1, 1) ;
   end = _rdtsc () ;
 
@@ -113,11 +98,21 @@ printf("=========================VECTEUR Double================================\
   printf ("resultat en flops : %f\n",m_Flops) ;
   printf("\n");
 
-  if(comparaisonVecteurDouble(vecd1,VECSIZE,blvecd1,VECSIZE)){
-    printf ("Résultats entre cblas et mnblas identiques\n") ;
+  start = _rdtsc () ;
+     resultatd2 = mncblas_dnrm2_static (VECSIZE, vecd1, 1) ;
+  end = _rdtsc () ;
+
+  m_Flops=FLOPS(1,3.4,2*VECSIZE,end-start-residu);
+  printf ("mncblas_dasum_openmp nombre de cycles: %Ld \n", end-start-residu) ;
+  printf ("resultat: %f\n",resultatd2);
+  printf ("resultat en flops : %f\n",m_Flops) ;
+  printf("\n");
+
+  if(resultatd2 == resultatd2){
+    printf ("Résultats entre mncblas et mnblas_openmp identiques\n") ;
   }
   else{
-    printf ("Erreurs ! Résultats entre cblas et mnblas différents\n") ;
+    printf ("Erreurs ! Résultats entre mncblas et mnblas_openmp différents\n") ;
   }
 
 
@@ -125,9 +120,6 @@ printf("=========================VECTEUR Double================================\
   printf("======================================================================\n\n");
 
 
-  /*printf("Vector 2 double\n");
-  vector_print_double(vecd2);
-  vector_print_double(vecd1);*/
 //============================================================================================================================//
 
 //====================================================vecteur complex_simple===========================================================//
@@ -140,30 +132,30 @@ printf("=========================VECTEUR Double================================\
   printf("=========================VECTEUR COMPLEXES SIMPLES================================\n");
 
   start = _rdtsc () ;
-     resultatcs = cblas_scnrm2 (VECSIZE, veccs1, 1) ;
+     resultatcs = mncblas_scnrm2 (VECSIZE, veccs1, 1) ;
   end = _rdtsc () ;
 
   m_Flops=FLOPS(1,3.4,2*VECSIZE,end-start-residu);
-  printf ("mncblas_scasum nombre de cycles cblas: %Ld \n", end-start-residu) ;
+  printf ("mncblas_scnrm2 nombre de cycles cblas: %Ld \n", end-start-residu) ;
   printf ("resultat: %f\n",resultatcs);
   printf ("resultat en flops : %f\n",m_Flops) ;
   printf("\n");
 
   start = _rdtsc () ;
-     resultatcs = mncblas_scnrm2 (VECSIZE, veccs1, 1) ;
+     resultatcs2 = mncblas_scnrm2_static (VECSIZE, veccs1, 1) ;
   end = _rdtsc () ;
 
   m_Flops=FLOPS(1,3.4,2*VECSIZE,end-start-residu);
-  printf ("mncblas_scasum nombre de cycles cblas: %Ld \n", end-start-residu) ;
-  printf ("resultat: %f\n",resultatcs);
+  printf ("mncblas_scnrm2_openmp nombre de cycles cblas: %Ld \n", end-start-residu) ;
+  printf ("resultat: %f\n",resultatcs2);
   printf ("resultat en flops : %f\n",m_Flops) ;
   printf("\n");
 
-  if(comparaisonVecteurCS(veccs1,VECSIZE,blveccs1,VECSIZE)){
-    printf ("Résultats entre cblas et mnblas identiques\n") ;
+  if(resultatcs2 == resultatcs){
+    printf ("Résultats entre mncblas et mnblas_openmp identiques\n") ;
   }
   else{
-    printf ("Erreurs ! Résultats entre cblas et mnblas différents\n") ;
+    printf ("Erreurs ! Résultats entre mncblas et mnblas_openmp différents\n") ;
   }
 
 
@@ -183,31 +175,31 @@ printf("=========================VECTEUR Double================================\
 
 printf("=========================VECTEUR COMPLEXES DOUBLES================================\n");
   start = _rdtsc () ;
-     resultatcd = cblas_dznrm2 (VECSIZE, veccd1, 1) ;
+     resultatcd = mncblas_dznrm2 (VECSIZE, veccd1, 1) ;
   end = _rdtsc () ;
 
   m_Flops=FLOPS(1,3.4,2*VECSIZE,end-start-residu);
-  printf ("mncblas_dzasum nombre de cycles cblas: %Ld \n", end-start-residu) ;
+  printf ("mncblas_dznrm2 nombre de cycles: %Ld \n", end-start-residu) ;
   printf ("resultat: %f\n",resultatcd);
   printf ("resultat en flops : %f\n",m_Flops) ;
   printf("\n");
 
   start = _rdtsc () ;
-     resultatcd = mncblas_dznrm2 (VECSIZE, veccd1, 1) ;
+     resultatcd2 = mncblas_dznrm2_static (VECSIZE, veccd1, 1) ;
   end = _rdtsc () ;
 
   m_Flops=FLOPS(1,3.4,2*VECSIZE,end-start-residu);
-  printf ("mncblas_dzasum nombre de cycles cblas: %Ld \n", end-start-residu) ;
-  printf ("resultat: %f\n",resultatcd);
+  printf ("mncblas_dznrm2_openmp nombre de cycles: %Ld \n", end-start-residu) ;
+  printf ("resultat: %f\n",resultatcd2);
   printf ("resultat en flops : %f\n",m_Flops) ;
   printf("\n");
 
 
-  if(comparaisonVecteurCD(veccd1,VECSIZE,blveccd1,VECSIZE)){
-    printf ("Résultats entre cblas et mnblas identiques\n") ;
+  if(resultatcd == resultatcd2){
+    printf ("Résultats entre mncblas et mnblas_openmp identiques\n") ;
   }
   else{
-    printf ("Erreurs ! Résultats entre cblas et mnblas différents\n") ;
+    printf ("Erreurs ! Résultats entre mncblas et mnblas_openmp différents\n") ;
   }
 
 

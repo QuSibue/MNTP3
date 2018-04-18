@@ -63,10 +63,10 @@ printf("=========================VECTEUR FLOAT================================\n
   printf("\n");
 
   if(comparaisonVecteurFloat(vec2,VECSIZE,blvec2,VECSIZE)){
-    printf ("Résultats entre mncblas et mnblas_static identiques\n") ;
+    printf ("Résultats entre mncblas et mnblas_openmp identiques\n") ;
   }
   else{
-    printf ("Erreurs ! Résultats entre mncblas et mnblas_static différents\n") ;
+    printf ("Erreurs ! Résultats entre mncblas et mnblas_openmp différents\n") ;
   }
 
 
@@ -107,10 +107,10 @@ printf("=========================VECTEUR Double================================\
   printf("\n");
 
   if(comparaisonVecteurDouble(vecd2,VECSIZE,blvecd2,VECSIZE)){
-    printf ("Résultats entre mncblas et mnblas_static identiques\n") ;
+    printf ("Résultats entre mncblas et mnblas_openmp identiques\n") ;
   }
   else{
-    printf ("Erreurs ! Résultats mncblas et mnblas_static différents\n") ;
+    printf ("Erreurs ! Résultats mncblas et mnblas_openmp différents\n") ;
   }
 
 
@@ -159,10 +159,10 @@ printf("=========================VECTEUR Double================================\
 
 
   if(comparaisonVecteurCS(veccs2,VECSIZE,blveccs2,VECSIZE)){
-    printf ("Résultats entre mncblas et mnblas_static identiques\n") ;
+    printf ("Résultats entre mncblas et mnblas_openmp identiques\n") ;
   }
   else{
-    printf ("Erreurs ! Résultats entre mncblas et mnblas_static différents\n") ;
+    printf ("Erreurs ! Résultats entre mncblas et mnblas_openmp différents\n") ;
   }
 
 
@@ -209,10 +209,10 @@ printf("=========================VECTEUR COMPLEXES DOUBLES======================
   printf("\n");
 
   if(comparaisonVecteurCD(veccd2,VECSIZE,blveccd2,VECSIZE)){
-    printf ("Résultats entre mncblas et mnblas_static identiques\n") ;
+    printf ("Résultats entre mncblas et mnblas_openmp identiques\n") ;
   }
   else{
-    printf ("Erreurs ! Résultats entre mncblas et mnblas_static différents\n") ;
+    printf ("Erreurs ! Résultats entre mncblas et mnblas_openmp différents\n") ;
   }
 
 

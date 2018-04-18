@@ -121,6 +121,16 @@ float mncblas_scnrm2(const int N,const void *X,const int incX);
 
 double  mncblas_dznrm2(const int N,const void *X,const int incX);
 
+//										Version Concurente								//
+
+float mncblas_snrm2_static(const int N,const float *X,const int incX);
+
+double mncblas_dnrm2_static(const int N,const double *X,const int incX);
+
+float mncblas_scnrm2_static(const int N,const void *X,const int incX);
+
+double  mncblas_dznrm2_static(const int N,const void *X,const int incX);
+
  /* END BLAS NRM2 */
 
 /* BLAS ASUM */
@@ -153,6 +163,8 @@ void mncblas_daxpy(const int N, const double alpha, const double *X,const int in
 void mncblas_caxpy(const int N, const void *alpha, const void *X,const int incX, void *Y, const int incY);
 
 void mncblas_zaxpy(const int N, const void *alpha, const void *X,const int incX, void *Y, const int incY);
+
+//										Version Concurente								//
 
 void mncblas_saxpy_static(const int N, const float alpha, const float *X,const int incX, float *Y, const int incY);
 
