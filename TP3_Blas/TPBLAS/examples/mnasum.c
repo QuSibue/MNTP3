@@ -48,7 +48,7 @@ printf("=========================VECTEUR FLOAT================================\n
   end = _rdtsc () ;
 
   m_Flops=FLOPS(1,3.4,2*VECSIZE,end-start-residu);
-  printf ("cblas_sasum nombre de cycles cblas: %Ld \n", end-start-residu) ;
+  printf ("mncblas_sasum nombre de cycles: %Ld \n", end-start-residu) ;
   printf ("resultat: %f\n",resultatf);
 	printf ("resultat en Gflops : %f\n",m_Flops) ;
   printf("\n");
@@ -58,7 +58,7 @@ printf("=========================VECTEUR FLOAT================================\n
   end = _rdtsc () ;
 	
 	m_Flops=FLOPS(1,3.4,2*VECSIZE,end-start-residu);
-	printf ("mncblas_sasum: nombre de cycles: %Ld \n", end-start-residu) ;
+	printf ("mncblas_sasum_static: nombre de cycles: %Ld \n", end-start-residu) ;
   printf ("resultat: %f \n",resultatf) ;
 	printf ("resultat en Gflop : %f \n",m_Flops) ;
   printf("\n");
@@ -66,7 +66,7 @@ printf("=========================VECTEUR FLOAT================================\n
 
 
   if(resultatf = resultatf2){
-    printf ("Résultats entre cblas et mnblas identiques\n") ;
+    printf ("Résultats entre mncblas et mnblas_static identiques\n") ;
   }
   else{
     printf ("Erreurs ! Résultats entre mncblas et mnblas_static différents\n") ;
@@ -91,7 +91,7 @@ printf("=========================VECTEUR Double================================\
   end = _rdtsc () ;
 
   m_Flops=FLOPS(1,3.4,2*VECSIZE,end-start-residu);
-  printf ("cblas_dasum nombre de cycles cblas: %Ld \n", end-start-residu) ;
+  printf ("mncblas_dasum nombre de cycles : %Ld \n", end-start-residu) ;
   printf ("resultat: %f\n",resultatd);
 	printf ("resultat en Gflops : %f\n",m_Flops) ;
   printf("\n");
@@ -102,16 +102,16 @@ printf("=========================VECTEUR Double================================\
   end = _rdtsc () ;
 
   m_Flops=FLOPS(1,3.4,2*VECSIZE,end-start-residu);
-  printf ("mncblas_dasum nombre de cycles cblas: %Ld \n", end-start-residu) ;
+  printf ("mncblas_dasum_static nombre de cycles : %Ld \n", end-start-residu) ;
   printf ("resultat: %f\n",resultatd);
 	printf ("resultat en Gflops : %f\n",m_Flops) ;
   printf("\n");
 
   if(resultatd = resultatd2){
-    printf ("Résultats entre cblas et mnblas identiques\n") ;
+    printf ("Résultats entre mncblas et mnblas_static identiques\n") ;
   }
   else{
-    printf ("Erreurs ! Résultats entre cblas et mnblas différents\n") ;
+    printf ("Erreurs ! Résultats entre mncblas et mnblas_static différents\n") ;
   }
 
 
@@ -134,7 +134,7 @@ printf("=========================VECTEUR COMPLEXES SIMPLES======================
   end = _rdtsc () ;
 
   m_Flops=FLOPS(1,3.4,2*VECSIZE,end-start-residu);
-  printf ("mncblas_scasum nombre de cycles cblas: %Ld \n", end-start-residu) ;
+  printf ("mncblas_scasum nombre de cycles: %Ld \n", end-start-residu) ;
   printf ("resultat: %f\n",resultatcs);
   printf ("resultat en Gflops : %f\n",m_Flops) ;
   printf("\n");
@@ -144,16 +144,16 @@ printf("=========================VECTEUR COMPLEXES SIMPLES======================
   end = _rdtsc () ;
 
   m_Flops=FLOPS(1,3.4,2*VECSIZE,end-start-residu);
-  printf ("mncblas_scasum nombre de cycles cblas: %Ld \n", end-start-residu) ;
+  printf ("mncblas_scasum_static nombre de cycles: %Ld \n", end-start-residu) ;
   printf ("resultat: %f\n",resultatcs);
   printf ("resultat en Gflops : %f\n",m_Flops) ;
   printf("\n");
 
   if(resultatcs = resultatcs2){
-    printf ("Résultats entre cblas et mnblas identiques\n") ;
+    printf ("Résultats entre mncblas et mnblas_static identiques\n") ;
   }
   else{
-    printf ("Erreurs ! Résultats entre cblas et mnblas différents\n") ;
+    printf ("Erreurs ! Résultats entre mncblas et mnblas_static différents\n") ;
   }
 
 
@@ -178,7 +178,7 @@ printf("=========================VECTEUR COMPLEXES DOUBLES======================
   end = _rdtsc () ;
 
   m_Flops=FLOPS(1,3.4,2*VECSIZE,end-start-residu);
-  printf ("mncblas_dzasum nombre de cycles cblas: %Ld \n", end-start-residu) ;
+  printf ("mncblas_dzasum nombre de cycles : %Ld \n", end-start-residu) ;
   printf ("resultat: %f\n",resultatcd);
   printf ("resultat en Gflops : %f\n",m_Flops) ;
   printf("\n");
@@ -188,16 +188,16 @@ printf("=========================VECTEUR COMPLEXES DOUBLES======================
   end = _rdtsc () ;
 
   m_Flops=FLOPS(1,3.4,2*VECSIZE,end-start-residu);
-  printf ("mncblas_dzasum nombre de cycles cblas: %Ld \n", end-start-residu) ;
+  printf ("mncblas_dzasum_static nombre de cycles : %Ld \n", end-start-residu) ;
   printf ("resultat: %f\n",resultatcd);
   printf ("resultat en Gflops : %f\n",m_Flops) ;
   printf("\n");
 
   if(resultatcd = resultatcd2){
-    printf ("Résultats entre cblas et mnblas identiques\n") ;
+    printf ("Résultats entre mncblas et mnblas_static identiques\n") ;
   }
   else{
-    printf ("Erreurs ! Résultats entre cblas et mnblas différents\n") ;
+    printf ("Erreurs ! Résultats entre mncblas et mnblas_static différents\n") ;
   }
 
 
