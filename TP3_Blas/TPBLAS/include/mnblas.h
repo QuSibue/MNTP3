@@ -154,6 +154,14 @@ void mncblas_caxpy(const int N, const void *alpha, const void *X,const int incX,
 
 void mncblas_zaxpy(const int N, const void *alpha, const void *X,const int incX, void *Y, const int incY);
 
+void mncblas_saxpy_static(const int N, const float alpha, const float *X,const int incX, float *Y, const int incY);
+
+void mncblas_daxpy_static(const int N, const double alpha, const double *X,const int incX, double *Y, const int incY);
+
+void mncblas_caxpy_static(const int N, const void *alpha, const void *X,const int incX, void *Y, const int incY);
+
+void mncblas_zaxpy_static(const int N, const void *alpha, const void *X,const int incX, void *Y, const int incY);
+
 /*END BLAS AXPY*/
 
 /*
