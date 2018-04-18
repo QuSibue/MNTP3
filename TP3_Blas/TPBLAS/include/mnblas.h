@@ -32,6 +32,23 @@ void mncblas_zcopy(const int N, const void *X, const int incX,
                  void *Y, const int incY);
 
 
+
+void mncblas_scopy_static(const int N, const float *X, const int incX,
+                 float *Y, const int incY);
+
+void mncblas_dcopy_static(const int N, const double *X, const int incX,
+                 double *Y, const int incY);
+
+
+void mncblas_ccopy_static(const int N, const void *X, const int incX,
+                 void *Y, const int incY);
+
+
+void mncblas_zcopy_static(const int N, const void *X, const int incX,
+                 void *Y, const int incY);
+
+
+
 /*
   end COPY BLAS
 */
@@ -114,6 +131,16 @@ double mncblas_dasum(const int N, const double *X, const int incX);
 float mncblas_scasum(const int N, const void *X, const int incX);
 
 double mncblas_dzasum(const int N, const void *X, const int incX);
+
+//										Version Concurente								//
+
+float mncblas_sasum_static(const int N, const float *X, const int incX);
+
+double mncblas_dasum_static(const int N, const double *X, const int incX);
+
+float mncblas_scasum_static(const int N, const void *X, const int incX);
+
+double mncblas_dzasum_static(const int N, const void *X, const int incX);
 
  /* END BLAS ASUM */
 
