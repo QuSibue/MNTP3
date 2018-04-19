@@ -124,7 +124,7 @@ void mncblas_zaxpy_static(const int N, const void* a, const void *X, const int i
 		                    void *Y, const int incY)
 {
   register unsigned int i = 0 ;
-
+#pragma omp parallel for schedule(static)
   for (i=0; i < N ; i += 8*incX)
     {
       ((struct complex_double*)Y)[i] = addition_cd( ((struct complex_double*)Y)[i] , multiplication_cd( *((struct complex_double*)a) , ((struct complex_double*)X)[i] ) );
