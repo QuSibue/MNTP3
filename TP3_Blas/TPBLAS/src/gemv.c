@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include "mnblas.h"
 #include "complex.h"
+#include <omp.h>
+#include <x86intrin.h>
 
 void mncblas_sgemv (const MNCBLAS_LAYOUT layout,
                  const MNCBLAS_TRANSPOSE TransA, const int M, const int N,

@@ -9,6 +9,7 @@
   Mesure des cycles
 */
 
+#include <omp.h>
 #include <x86intrin.h>
 
 //===================================================DEFINITION=============================================================================================//
@@ -247,7 +248,7 @@ printf("=========================VECTEUR DOUBLE================================\
         printf ("mncblas_sgemm: nombre de cycles: %Ld \n", end-start-residu) ;
       	printf ("resultat en Gflop : %f \n",m_Flops) ;
         printf("\n");
-        
+
         vector_Minit_cdouble (veccdC, cds) ;
         start = _rdtsc () ;
            cblas_zgemm (MNCblasRowMajor,MNCblasNoTrans,MNCblasNoTrans,M,M,K,&alphacd, veccdA,M,veccdB,N,&betacd,veccdC,N) ;

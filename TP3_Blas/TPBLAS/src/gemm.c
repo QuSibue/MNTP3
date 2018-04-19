@@ -1,5 +1,7 @@
 #include "mnblas.h"
 #include "complex.h"
+#include <omp.h>
+#include <x86intrin.h>
 
 
 // Float //

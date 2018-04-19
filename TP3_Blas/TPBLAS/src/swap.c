@@ -1,5 +1,7 @@
 #include "mnblas.h"
 #include "complex.h"
+#include <omp.h>
+#include <x86intrin.h>
 
 void mncblas_sswap(const int N, float *X, const int incX,
                  float *Y, const int incY)

@@ -1,5 +1,7 @@
 #include "mnblas.h"
 #include "complex.h"
+#include <omp.h>
+#include <x86intrin.h>
 
 float mncblas_sdot(const int N, const float *X, const int incX,
                  const float *Y, const int incY)
