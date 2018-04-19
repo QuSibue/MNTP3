@@ -4,10 +4,11 @@
 #include "mnblas.h"
 #include "complex.h"
 #include "fonctions_test.h"
+
 /*
   Mesure des cycles
 */
-
+#include <omp.h>
 #include <x86intrin.h>
 
 //===================================================DEFINITION=============================================================================================//
@@ -56,7 +57,7 @@ printf("=========================VECTEUR FLOAT================================\n
   start = _rdtsc () ;
      resultatf2=mncblas_sasum_static (VECSIZE, blvec1, 1) ;
   end = _rdtsc () ;
-	
+
 	m_Flops=FLOPS(1,3.4,2*VECSIZE,end-start-residu);
 	printf ("mncblas_sasum_openmp: nombre de cycles: %Ld \n", end-start-residu) ;
   printf ("resultat: %f \n",resultatf2) ;

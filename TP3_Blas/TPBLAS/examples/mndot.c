@@ -9,6 +9,7 @@
   Mesure des cycles
 */
 
+#include <omp.h>
 #include <x86intrin.h>
 
 

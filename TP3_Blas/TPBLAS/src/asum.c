@@ -1,6 +1,9 @@
 #include "mnblas.h"
 #include "complex.h"
 #include "math.h"
+#include <omp.h>
+#include <x86intrin.h>
+
 
 float mncblas_sasum(const int N, const float *X, const int incX)
 {
@@ -142,5 +145,3 @@ double mncblas_dzasum_static(const int N, const void *X, const int incX)
   return resultat;
 
 }
-
-

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "fonctions_test.h"
+#include <omp.h>
 
 
 

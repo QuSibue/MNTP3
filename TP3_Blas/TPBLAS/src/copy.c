@@ -1,5 +1,7 @@
 #include "mnblas.h"
 #include "complex.h"
+#include <omp.h>
+#include <x86intrin.h>
 
 
 
@@ -181,4 +183,3 @@ void mncblas_zcopy_static(const int N, const void *X, const int incX,
 
     }
 }
-

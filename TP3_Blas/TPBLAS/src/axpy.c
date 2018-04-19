@@ -1,5 +1,7 @@
 #include "mnblas.h"
 #include "complex.h"
+#include <omp.h>
+#include <x86intrin.h>
 
 void mncblas_saxpy(const int N, const float a, const float *X, const int incX,
                  float *Y, const int incY)
@@ -140,9 +142,3 @@ void mncblas_zaxpy_static(const int N, const void* a, const void *X, const int i
 
   return ;
 }
-
-
-
-
-
-
