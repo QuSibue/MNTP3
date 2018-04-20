@@ -9,8 +9,8 @@ LIBDYN=-lmnblasdyn -lm
 
 OPTIONS_COMPIL  =-O2 -fPIC -msse4.2 -fopenmp -I$(INC_DIR)
 
-OPTIONS_LINK_STATIC  = -L$(LIB_DIR) $(LIBST) -lgsl -lgslcblas -lm
-OPTIONS_LINK_DYN  = -L$(LIB_DIR) $(LIBDYN) -lgsl -lgslcblas -lm
+OPTIONS_LINK_STATIC  = -L$(LIB_DIR) $(LIBST) -fopenmp -lgsl -lgslcblas -lm
+OPTIONS_LINK_DYN  = -L$(LIB_DIR) $(LIBDYN) -fopenmp -lgsl -lgslcblas -lm
 
 mntest: mntest.o $(LIB_DIR)/libmnblas.a fonctions_test.o
 	gcc -o mntest mntest.o fonctions_test.o $(OPTIONS_LINK_STATIC)

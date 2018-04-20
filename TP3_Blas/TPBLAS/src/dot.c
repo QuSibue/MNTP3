@@ -96,52 +96,55 @@ void   mncblas_cdotu_sub_static(const int N, const void *X, const int incX,
 {
   register unsigned int i = 0 ;
 
-  ((struct complex_simple*)dotu)->real = 0;
-  ((struct complex_simple*)dotu)->imaginary = 0;
+  float real =0;
+  float imaginary = 0;
 
-#pragma omp parallel for schedule(static) reduction(+: ((struct complex_simple*)dotu)->real , ((struct complex_simple*)dotu)->imaginary)
+#pragma omp parallel for schedule(static) reduction(+: real , imaginary)
   for (i=0; i < N ; i += incX)
     {
-      ((struct complex_simple*)dotu)->real +=( ( ((struct complex_simple*)X)[i].real * ((struct complex_simple*)Y)[i].real ) - ( ((struct complex_simple*)X)[i].imaginary * ((struct complex_simple*)Y)[i].imaginary) ) ;
+      real +=( ( ((struct complex_simple*)X)[i].real * ((struct complex_simple*)Y)[i].real ) - ( ((struct complex_simple*)X)[i].imaginary * ((struct complex_simple*)Y)[i].imaginary) ) ;
 
-      ((struct complex_simple*)dotu)->imaginary += ( ( ((struct complex_simple*)X)[i].real * ((struct complex_simple*)Y)[i].imaginary ) + ( ((struct complex_simple*)X)[i].imaginary * ((struct complex_simple*)Y)[i].real ) );
-
-
-      ((struct complex_simple*)dotu)->real +=( ( ((struct complex_simple*)X)[i+1].real * ((struct complex_simple*)Y)[i+1].real ) - ( ((struct complex_simple*)X)[i+1].imaginary * ((struct complex_simple*)Y)[i+1].imaginary) ) ;
-
-      ((struct complex_simple*)dotu)->imaginary += ( ( ((struct complex_simple*)X)[i+1].real * ((struct complex_simple*)Y)[i+1].imaginary ) + ( ((struct complex_simple*)X)[i+1].imaginary * ((struct complex_simple*)Y)[i+1].real ) );
+      imaginary += ( ( ((struct complex_simple*)X)[i].real * ((struct complex_simple*)Y)[i].imaginary ) + ( ((struct complex_simple*)X)[i].imaginary * ((struct complex_simple*)Y)[i].real ) );
 
 
-      ((struct complex_simple*)dotu)->real +=( ( ((struct complex_simple*)X)[i+2].real * ((struct complex_simple*)Y)[i+2].real ) - ( ((struct complex_simple*)X)[i+2].imaginary * ((struct complex_simple*)Y)[i+2].imaginary) ) ;
+      real +=( ( ((struct complex_simple*)X)[i+1].real * ((struct complex_simple*)Y)[i+1].real ) - ( ((struct complex_simple*)X)[i+1].imaginary * ((struct complex_simple*)Y)[i+1].imaginary) ) ;
 
-      ((struct complex_simple*)dotu)->imaginary += ( ( ((struct complex_simple*)X)[i+2].real * ((struct complex_simple*)Y)[i+2].imaginary ) + ( ((struct complex_simple*)X)[i+2].imaginary * ((struct complex_simple*)Y)[i+2].real ) );
-
-
-      ((struct complex_simple*)dotu)->real +=( ( ((struct complex_simple*)X)[i+3].real * ((struct complex_simple*)Y)[i+3].real ) - ( ((struct complex_simple*)X)[i+3].imaginary * ((struct complex_simple*)Y)[i+3].imaginary) ) ;
-
-      ((struct complex_simple*)dotu)->imaginary += ( ( ((struct complex_simple*)X)[i+3].real * ((struct complex_simple*)Y)[i+3].imaginary ) + ( ((struct complex_simple*)X)[i+3].imaginary * ((struct complex_simple*)Y)[i+3].real ) );
+      imaginary += ( ( ((struct complex_simple*)X)[i+1].real * ((struct complex_simple*)Y)[i+1].imaginary ) + ( ((struct complex_simple*)X)[i+1].imaginary * ((struct complex_simple*)Y)[i+1].real ) );
 
 
-      ((struct complex_simple*)dotu)->real +=( ( ((struct complex_simple*)X)[i+4].real * ((struct complex_simple*)Y)[i+4].real ) - ( ((struct complex_simple*)X)[i+4].imaginary * ((struct complex_simple*)Y)[i+4].imaginary) ) ;
+      real +=( ( ((struct complex_simple*)X)[i+2].real * ((struct complex_simple*)Y)[i+2].real ) - ( ((struct complex_simple*)X)[i+2].imaginary * ((struct complex_simple*)Y)[i+2].imaginary) ) ;
 
-      ((struct complex_simple*)dotu)->imaginary += ( ( ((struct complex_simple*)X)[i+4].real * ((struct complex_simple*)Y)[i+4].imaginary ) + ( ((struct complex_simple*)X)[i+4].imaginary * ((struct complex_simple*)Y)[i+4].real ) );
-
-
-      ((struct complex_simple*)dotu)->real +=( ( ((struct complex_simple*)X)[i+5].real * ((struct complex_simple*)Y)[i+5].real ) - ( ((struct complex_simple*)X)[i+5].imaginary * ((struct complex_simple*)Y)[i+5].imaginary) ) ;
-
-      ((struct complex_simple*)dotu)->imaginary += ( ( ((struct complex_simple*)X)[i+5].real * ((struct complex_simple*)Y)[i+5].imaginary ) + ( ((struct complex_simple*)X)[i+5].imaginary * ((struct complex_simple*)Y)[i+5].real ) );
+      imaginary += ( ( ((struct complex_simple*)X)[i+2].real * ((struct complex_simple*)Y)[i+2].imaginary ) + ( ((struct complex_simple*)X)[i+2].imaginary * ((struct complex_simple*)Y)[i+2].real ) );
 
 
-      ((struct complex_simple*)dotu)->real +=( ( ((struct complex_simple*)X)[i+6].real * ((struct complex_simple*)Y)[i+6].real ) - ( ((struct complex_simple*)X)[i+6].imaginary * ((struct complex_simple*)Y)[i+6].imaginary) ) ;
+      real +=( ( ((struct complex_simple*)X)[i+3].real * ((struct complex_simple*)Y)[i+3].real ) - ( ((struct complex_simple*)X)[i+3].imaginary * ((struct complex_simple*)Y)[i+3].imaginary) ) ;
 
-      ((struct complex_simple*)dotu)->imaginary += ( ( ((struct complex_simple*)X)[i+6].real * ((struct complex_simple*)Y)[i+6].imaginary ) + ( ((struct complex_simple*)X)[i+6].imaginary * ((struct complex_simple*)Y)[i+6].real ) );
+      imaginary += ( ( ((struct complex_simple*)X)[i+3].real * ((struct complex_simple*)Y)[i+3].imaginary ) + ( ((struct complex_simple*)X)[i+3].imaginary * ((struct complex_simple*)Y)[i+3].real ) );
 
 
-      ((struct complex_simple*)dotu)->real +=( ( ((struct complex_simple*)X)[i+7].real * ((struct complex_simple*)Y)[i+7].real ) - ( ((struct complex_simple*)X)[i+7].imaginary * ((struct complex_simple*)Y)[j].imaginary) ) ;
+      real +=( ( ((struct complex_simple*)X)[i+4].real * ((struct complex_simple*)Y)[i+4].real ) - ( ((struct complex_simple*)X)[i+4].imaginary * ((struct complex_simple*)Y)[i+4].imaginary) ) ;
 
-      ((struct complex_simple*)dotu)->imaginary += ( ( ((struct complex_simple*)X)[i+7].real * ((struct complex_simple*)Y)[i+7].imaginary ) + ( ((struct complex_simple*)X)[i+7].imaginary * ((struct complex_simple*)Y)[j].real ) );
+      imaginary += ( ( ((struct complex_simple*)X)[i+4].real * ((struct complex_simple*)Y)[i+4].imaginary ) + ( ((struct complex_simple*)X)[i+4].imaginary * ((struct complex_simple*)Y)[i+4].real ) );
+
+
+      real +=( ( ((struct complex_simple*)X)[i+5].real * ((struct complex_simple*)Y)[i+5].real ) - ( ((struct complex_simple*)X)[i+5].imaginary * ((struct complex_simple*)Y)[i+5].imaginary) ) ;
+
+      imaginary += ( ( ((struct complex_simple*)X)[i+5].real * ((struct complex_simple*)Y)[i+5].imaginary ) + ( ((struct complex_simple*)X)[i+5].imaginary * ((struct complex_simple*)Y)[i+5].real ) );
+
+
+      real +=( ( ((struct complex_simple*)X)[i+6].real * ((struct complex_simple*)Y)[i+6].real ) - ( ((struct complex_simple*)X)[i+6].imaginary * ((struct complex_simple*)Y)[i+6].imaginary) ) ;
+
+      imaginary += ( ( ((struct complex_simple*)X)[i+6].real * ((struct complex_simple*)Y)[i+6].imaginary ) + ( ((struct complex_simple*)X)[i+6].imaginary * ((struct complex_simple*)Y)[i+6].real ) );
+
+
+      real +=( ( ((struct complex_simple*)X)[i+7].real * ((struct complex_simple*)Y)[i+7].real ) - ( ((struct complex_simple*)X)[i+7].imaginary * ((struct complex_simple*)Y)[i+7].imaginary) ) ;
+
+      imaginary += ( ( ((struct complex_simple*)X)[i+7].real * ((struct complex_simple*)Y)[i+7].imaginary ) + ( ((struct complex_simple*)X)[i+7].imaginary * ((struct complex_simple*)Y)[i+7].real ) );
 
     }
+
+    ((struct complex_simple*)dotu)->real = real;
+    ((struct complex_simple*)dotu)->imaginary = imaginary;
 
   return ;
 }
@@ -173,42 +176,40 @@ void   mncblas_cdotc_sub_static(const int N, const void *X, const int incX,
 {
   register unsigned int i = 0 ;
 
-  ((struct complex_simple*)dotc)->real = 0;
-  ((struct complex_simple*)dotc)->imaginary = 0;
+  float real =0;
+  float imaginary = 0;
 
-#pragma omp parallel for schedule(static) reduction(+:dotc->real , dotc->imaginary)
+#pragma omp parallel for schedule(static) reduction(+:real ,imaginary)
   for (i=0; i < N; i += incX)
     {
-      ((struct complex_simple*)dotc)->real +=  ( ( ((struct complex_simple*)X)[i].real * ((struct complex_simple*)Y)[i].real ) + ( ((struct complex_simple*)X)[i].imaginary * ((struct complex_simple*)Y)[i].imaginary) ) ;
-      ((struct complex_simple*)dotc)->imaginary += ( ( ((struct complex_simple*)X)[i].real * ((struct complex_simple*)Y)[i].imaginary ) - ( ((struct complex_simple*)X)[i].imaginary * ((struct complex_simple*)Y)[i].real ) );
+      real +=  ( ( ((struct complex_simple*)X)[i].real * ((struct complex_simple*)Y)[i].real ) + ( ((struct complex_simple*)X)[i].imaginary * ((struct complex_simple*)Y)[i].imaginary) ) ;
+      imaginary += ( ( ((struct complex_simple*)X)[i].real * ((struct complex_simple*)Y)[i].imaginary ) - ( ((struct complex_simple*)X)[i].imaginary * ((struct complex_simple*)Y)[i].real ) );
 
-      ((struct complex_simple*)dotc)->real +=  ( ( ((struct complex_simple*)X)[i+1].real * ((struct complex_simple*)Y)[i+1].real ) + ( ((struct complex_simple*)X)[i+1].imaginary * ((struct complex_simple*)Y)[i+1].imaginary) ) ;
-      ((struct complex_simple*)dotc)->imaginary += ( ( ((struct complex_simple*)X)[i+1].real * ((struct complex_simple*)Y)[i+1].imaginary ) - ( ((struct complex_simple*)X)[i+1].imaginary * ((struct complex_simple*)Y)[i+1].real ) );
+      real +=  ( ( ((struct complex_simple*)X)[i+1].real * ((struct complex_simple*)Y)[i+1].real ) + ( ((struct complex_simple*)X)[i+1].imaginary * ((struct complex_simple*)Y)[i+1].imaginary) ) ;
+      imaginary += ( ( ((struct complex_simple*)X)[i+1].real * ((struct complex_simple*)Y)[i+1].imaginary ) - ( ((struct complex_simple*)X)[i+1].imaginary * ((struct complex_simple*)Y)[i+1].real ) );
 
-      ((struct complex_simple*)dotc)->real +=  ( ( ((struct complex_simple*)X)[i+2].real * ((struct complex_simple*)Y)[i+2].real ) + ( ((struct complex_simple*)X)[i+2].imaginary * ((struct complex_simple*)Y)[i+2].imaginary) ) ;
-      ((struct complex_simple*)dotc)->imaginary += ( ( ((struct complex_simple*)X)[i+2].real * ((struct complex_simple*)Y)[i+2].imaginary ) - ( ((struct complex_simple*)X)[i+2].imaginary * ((struct complex_simple*)Y)[i+2].real ) );
+      real +=  ( ( ((struct complex_simple*)X)[i+2].real * ((struct complex_simple*)Y)[i+2].real ) + ( ((struct complex_simple*)X)[i+2].imaginary * ((struct complex_simple*)Y)[i+2].imaginary) ) ;
+      imaginary += ( ( ((struct complex_simple*)X)[i+2].real * ((struct complex_simple*)Y)[i+2].imaginary ) - ( ((struct complex_simple*)X)[i+2].imaginary * ((struct complex_simple*)Y)[i+2].real ) );
 
-      ((struct complex_simple*)dotc)->real +=  ( ( ((struct complex_simple*)X)[i+3].real * ((struct complex_simple*)Y)[i+3].real ) + ( ((struct complex_simple*)X)[i+3].imaginary * ((struct complex_simple*)Y)[i+3].imaginary) ) ;
-      ((struct complex_simple*)dotc)->imaginary += ( ( ((struct complex_simple*)X)[i+3].real * ((struct complex_simple*)Y)[i+3].imaginary ) - ( ((struct complex_simple*)X)[i+3].imaginary * ((struct complex_simple*)Y)[i+3].real ) );
+      real +=  ( ( ((struct complex_simple*)X)[i+3].real * ((struct complex_simple*)Y)[i+3].real ) + ( ((struct complex_simple*)X)[i+3].imaginary * ((struct complex_simple*)Y)[i+3].imaginary) ) ;
+      imaginary += ( ( ((struct complex_simple*)X)[i+3].real * ((struct complex_simple*)Y)[i+3].imaginary ) - ( ((struct complex_simple*)X)[i+3].imaginary * ((struct complex_simple*)Y)[i+3].real ) );
 
-      ((struct complex_simple*)dotc)->real +=  ( ( ((struct complex_simple*)X)[i+4].real * ((struct complex_simple*)Y)[i+4].real ) + ( ((struct complex_simple*)X)[i+4].imaginary * ((struct complex_simple*)Y)[i+4].imaginary) ) ;
-      ((struct complex_simple*)dotc)->imaginary += ( ( ((struct complex_simple*)X)[i+4].real * ((struct complex_simple*)Y)[i+4].imaginary ) - ( ((struct complex_simple*)X)[i+4].imaginary * ((struct complex_simple*)Y)[i+4].real ) );
+      real +=  ( ( ((struct complex_simple*)X)[i+4].real * ((struct complex_simple*)Y)[i+4].real ) + ( ((struct complex_simple*)X)[i+4].imaginary * ((struct complex_simple*)Y)[i+4].imaginary) ) ;
+      imaginary += ( ( ((struct complex_simple*)X)[i+4].real * ((struct complex_simple*)Y)[i+4].imaginary ) - ( ((struct complex_simple*)X)[i+4].imaginary * ((struct complex_simple*)Y)[i+4].real ) );
 
-      ((struct complex_simple*)dotc)->real +=  ( ( ((struct complex_simple*)X)[i+5].real * ((struct complex_simple*)Y)[i+5].real ) + ( ((struct complex_simple*)X)[i+5].imaginary * ((struct complex_simple*)Y)[i+5].imaginary) ) ;
-      ((struct complex_simple*)dotc)->imaginary += ( ( ((struct complex_simple*)X)[i+5].real * ((struct complex_simple*)Y)[i+5].imaginary ) - ( ((struct complex_simple*)X)[i+5].imaginary * ((struct complex_simple*)Y)[i+5].real ) );
+      real +=  ( ( ((struct complex_simple*)X)[i+5].real * ((struct complex_simple*)Y)[i+5].real ) + ( ((struct complex_simple*)X)[i+5].imaginary * ((struct complex_simple*)Y)[i+5].imaginary) ) ;
+      imaginary += ( ( ((struct complex_simple*)X)[i+5].real * ((struct complex_simple*)Y)[i+5].imaginary ) - ( ((struct complex_simple*)X)[i+5].imaginary * ((struct complex_simple*)Y)[i+5].real ) );
 
-      ((struct complex_simple*)dotc)->real +=  ( ( ((struct complex_simple*)X)[i+6].real * ((struct complex_simple*)Y)[i+6].real ) + ( ((struct complex_simple*)X)[i+6].imaginary * ((struct complex_simple*)Y)[i+6].imaginary) ) ;
-      ((struct complex_simple*)dotc)->imaginary += ( ( ((struct complex_simple*)X)[i+6].real * ((struct complex_simple*)Y)[i+6].imaginary ) - ( ((struct complex_simple*)X)[i+6].imaginary * ((struct complex_simple*)Y)[i+6].real ) );
+      real +=  ( ( ((struct complex_simple*)X)[i+6].real * ((struct complex_simple*)Y)[i+6].real ) + ( ((struct complex_simple*)X)[i+6].imaginary * ((struct complex_simple*)Y)[i+6].imaginary) ) ;
+      imaginary += ( ( ((struct complex_simple*)X)[i+6].real * ((struct complex_simple*)Y)[i+6].imaginary ) - ( ((struct complex_simple*)X)[i+6].imaginary * ((struct complex_simple*)Y)[i+6].real ) );
 
-      ((struct complex_simple*)dotc)->real +=  ( ( ((struct complex_simple*)X)[i+7].real * ((struct complex_simple*)Y)[i+7].real ) + ( ((struct complex_simple*)X)[i+7].imaginary * ((struct complex_simple*)Y)[i+7].imaginary) ) ;
-      ((struct complex_simple*)dotc)->imaginary += ( ( ((struct complex_simple*)X)[i+7].real * ((struct complex_simple*)Y)[i+7].imaginary ) - ( ((struct complex_simple*)X)[i+7].imaginary * ((struct complex_simple*)Y)[i+7].real ) );
-
-
-
-
-
-
+      real +=  ( ( ((struct complex_simple*)X)[i+7].real * ((struct complex_simple*)Y)[i+7].real ) + ( ((struct complex_simple*)X)[i+7].imaginary * ((struct complex_simple*)Y)[i+7].imaginary) ) ;
+      imaginary += ( ( ((struct complex_simple*)X)[i+7].real * ((struct complex_simple*)Y)[i+7].imaginary ) - ( ((struct complex_simple*)X)[i+7].imaginary * ((struct complex_simple*)Y)[i+7].real ) );
     }
+
+    ((struct complex_simple*)dotc)->real = real;
+    ((struct complex_simple*)dotc)->imaginary = imaginary;
+
 
   return ;
 }

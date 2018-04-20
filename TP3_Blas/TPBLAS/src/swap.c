@@ -28,8 +28,8 @@ void mncblas_sswap_static(const int N, float *X, const int incX,
 #pragma omp parallel for schedule(static) private(save)
   for (i=0; i < N; i += incX)
     {
-      save = Y [j] ;
-      Y [j] = X [i] ;
+      save = Y [i] ;
+      Y [i] = X [i] ;
       X [i] = save ;
 
       save = Y [i+1] ;
@@ -90,8 +90,8 @@ void mncblas_dswap_static(const int N, double *X, const int incX,
 #pragma omp parallel for schedule(static) private(save)
   for (i=0; i < N; i += incX)
     {
-      save = Y [j] ;
-      Y [j] = X [i] ;
+      save = Y [i] ;
+      Y [i] = X [i] ;
       X [i] = save ;
 
       save = Y [i+1] ;
@@ -249,4 +249,3 @@ void mncblas_zswap_static(const int N, void *X, const int incX,
   }
   return ;
 }
-
