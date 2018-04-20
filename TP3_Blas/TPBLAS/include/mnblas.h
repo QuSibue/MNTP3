@@ -95,6 +95,23 @@ void   mncblas_zdotu_sub(const int N, const void *X, const int incX,
 void   mncblas_zdotc_sub(const int N, const void *X, const int incX,
                        const void *Y, const int incY, void *dotc);
 
+//										Version Concurente								//
+
+float  mncblas_sdot_static(const int N, const float  *X, const int incX,
+                  const float  *Y, const int incY);
+double mncblas_ddot_static(const int N, const double *X, const int incX,
+                  const double *Y, const int incY);
+
+void   mncblas_cdotu_sub_static(const int N, const void *X, const int incX,
+                       const void *Y, const int incY, void *dotu);
+void   mncblas_cdotc_sub_static(const int N, const void *X, const int incX,
+                       const void *Y, const int incY, void *dotc);
+
+void   mncblas_zdotu_sub_static(const int N, const void *X, const int incX,
+                       const void *Y, const int incY, void *dotu);
+void   mncblas_zdotc_sub_static(const int N, const void *X, const int incX,
+                       const void *Y, const int incY, void *dotc);
+
 /*
   END BLAS DOT
 */
