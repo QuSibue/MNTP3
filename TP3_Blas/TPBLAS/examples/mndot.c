@@ -17,9 +17,9 @@
 
 
 vfloat vec1,blvec1,vec2,blvec2;
-float resultatf,resultatcs;
+float resultatf,resultatf2;
+double resultatd,resultatcd2;
 vdouble vecd1,blvecd1,vecd2,blvecd2;
-double resultatd,resultatcd;
 vcsimple veccs1,veccs2,blveccs1,blveccs2;
 vcdouble veccd1,veccd2,blveccd1,blveccd2;
 double m_Flops;
@@ -45,10 +45,10 @@ int main (int argc, char **argv)
 printf("=========================VECTEUR FLOAT================================\n");
 
   start = _rdtsc () ;
-     resultatf=cblas_sdot (VECSIZE, vec1, 1,vec2,1) ;
+     resultatf=mncblas_sdot (VECSIZE, vec1, 1,vec2,1) ;
   end = _rdtsc () ;
 
-  printf ("cblas_sdot nombre de cycles cblas: %Ld \n", end-start-residu) ;
+  printf ("mncblas_sdot nombre de cycles : %Ld \n", end-start-residu) ;
   printf ("resultat : %f\n",resultatf);
   m_Flops=FLOPS(1,3.4,2*VECSIZE,end-start-residu);
   printf ("resultat en Gflops : %f\n",m_Flops) ;
@@ -56,23 +56,17 @@ printf("=========================VECTEUR FLOAT================================\n
 
 
   start = _rdtsc () ;
-     resultatf=mncblas_sdot (VECSIZE, vec1, 1,vec2,1) ;
+     resultatf2=mncblas_sdot_static (VECSIZE, vec1, 1,vec2,1) ;
   end = _rdtsc () ;
 
-
-  /*printf ("Vector 2:\n") ;
-  vector_print (vec2) ;*/
-
-
-  printf ("mncblas_sdot: nombre de cycles: %Ld \n", end-start-residu) ;
-  printf ("resultat : %f \n",resultatf) ;
+  printf ("mncblas_sdot_openmp: nombre de cycles: %Ld \n", end-start-residu) ;
+  printf ("resultat : %f \n",resultatf2) ;
   m_Flops=FLOPS(1,3.4,2*VECSIZE,end-start-residu);
   printf ("resultat en Gflops : %f\n",m_Flops) ;
   printf("\n");
 
 printf("======================================================================\n\n");
-  /*printf("Vector 2 float :\n");
-  vector_print(vec2);*/
+
 //============================================================================================================================//
 
 
@@ -83,21 +77,21 @@ printf("======================================================================\n
 printf("=========================VECTEUR DOUBLE================================\n");
 
   start = _rdtsc () ;
-     resultatd = cblas_ddot (VECSIZE, vecd1, 1,vecd2,1) ;
+     resultatd = mncblas_ddot (VECSIZE, vecd1, 1,vecd2,1) ;
   end = _rdtsc () ;
 
-  printf ("cblas_ddot: nombre de cycles: %Ld \n", end-start-residu) ;
+  printf ("mncblas_ddot: nombre de cycles: %Ld \n", end-start-residu) ;
   printf ("resultat : %f\n",resultatd);
   m_Flops=FLOPS(1,3.4,2*VECSIZE,end-start-residu);
   printf ("resultat en Gflops : %f\n",m_Flops) ;
   printf("\n");
 
   start = _rdtsc () ;
-     resultatd = mncblas_ddot (VECSIZE, vecd1, 1,vecd2,1) ;
+     resultatd2 = mncblas_ddot_static (VECSIZE, vecd1, 1,vecd2,1) ;
   end = _rdtsc () ;
 
   printf ("mncblas_ddot: nombre de cycles: %Ld \n", end-start-residu) ;
-  printf ("resultat : %f\n",resultatd);
+  printf ("resultat : %f\n",resultatd2);
   m_Flops=FLOPS(1,3.4,2*VECSIZE,end-start-residu);
   printf ("resultat en Gflops : %f\n",m_Flops) ;
   printf("\n");
