@@ -18,7 +18,7 @@
 
 vfloat vec1,blvec1,vec2,blvec2;
 float resultatf,resultatf2;
-double resultatd,resultatcd2;
+double resultatd,resultatd2;
 vdouble vecd1,blvecd1,vecd2,blvecd2;
 vcsimple veccs1,veccs2,blveccs1,blveccs2;
 vcdouble veccd1,veccd2,blveccd1,blveccd2;

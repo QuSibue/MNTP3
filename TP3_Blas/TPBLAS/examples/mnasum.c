@@ -43,7 +43,6 @@ int main (int argc, char **argv)
 	vector_init (blvec1, 1.0) ;
 
 printf("=========================VECTEUR FLOAT================================\n");
-
   start = _rdtsc () ;
      resultatf=mncblas_sasum (VECSIZE, vec1, 1) ;
   end = _rdtsc () ;
@@ -54,6 +53,7 @@ printf("=========================VECTEUR FLOAT================================\n
 	printf ("resultat en Gflops : %f\n",m_Flops) ;
   printf("\n");
 
+
   start = _rdtsc () ;
      resultatf2=mncblas_sasum_static (VECSIZE, blvec1, 1) ;
   end = _rdtsc () ;
@@ -63,7 +63,6 @@ printf("=========================VECTEUR FLOAT================================\n
   printf ("resultat: %f \n",resultatf2) ;
 	printf ("resultat en Gflop : %f \n",m_Flops) ;
   printf("\n");
-
 
 
   if(resultatf == resultatf2){

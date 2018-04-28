@@ -229,6 +229,30 @@ void mncblas_zgemv(MNCBLAS_LAYOUT layout,
                  const void *X, const int incX, const void *beta,
                  void *Y, const int incY);
 
+void mncblas_sgemv_static(const MNCBLAS_LAYOUT layout,
+                 const MNCBLAS_TRANSPOSE TransA, const int M, const int N,
+                 const float alpha, const float *A, const int lda,
+                 const float *X, const int incX, const float beta,
+                 float *Y, const int incY);
+
+void mncblas_dgemv_static(MNCBLAS_LAYOUT layout,
+                 MNCBLAS_TRANSPOSE TransA, const int M, const int N,
+                 const double alpha, const double *A, const int lda,
+                 const double *X, const int incX, const double beta,
+                 double *Y, const int incY);
+
+void mncblas_cgemv_static(MNCBLAS_LAYOUT layout,
+                 MNCBLAS_TRANSPOSE TransA, const int M, const int N,
+                 const void *alpha, const void *A, const int lda,
+                 const void *X, const int incX, const void *beta,
+                 void *Y, const int incY);
+
+void mncblas_zgemv_static(MNCBLAS_LAYOUT layout,
+                 MNCBLAS_TRANSPOSE TransA, const int M, const int N,
+                 const void *alpha, const void *A, const int lda,
+                 const void *X, const int incX, const void *beta,
+                 void *Y, const int incY);
+
 
 
 /*
@@ -249,13 +273,33 @@ void mncblas_sgemm(MNCBLAS_LAYOUT layout, MNCBLAS_TRANSPOSE TransA,
                  const int lda, const float *B, const int ldb,
                  const float beta, float *C, const int ldc);
 
+void mncblas_sgemm_static(MNCBLAS_LAYOUT layout, MNCBLAS_TRANSPOSE TransA,
+                 MNCBLAS_TRANSPOSE TransB, const int M, const int N,
+                 const int K, const float alpha, const float *A,
+                 const int lda, const float *B, const int ldb,
+                 const float beta, float *C, const int ldc);
+
+
 void mncblas_dgemm(MNCBLAS_LAYOUT layout, MNCBLAS_TRANSPOSE TransA,
                  MNCBLAS_TRANSPOSE TransB, const int M, const int N,
                  const int K, const double alpha, const double *A,
                  const int lda, const double *B, const int ldb,
                  const double beta, double *C, const int ldc);
 
+void mncblas_dgemm_static(MNCBLAS_LAYOUT layout, MNCBLAS_TRANSPOSE TransA,
+                 MNCBLAS_TRANSPOSE TransB, const int M, const int N,
+                 const int K, const double alpha, const double *A,
+                 const int lda, const double *B, const int ldb,
+                 const double beta, double *C, const int ldc);
+
+
 void mncblas_cgemm(MNCBLAS_LAYOUT layout, MNCBLAS_TRANSPOSE TransA,
+                 MNCBLAS_TRANSPOSE TransB, const int M, const int N,
+                 const int K, const void *alpha, const void *A,
+                 const int lda, const void *B, const int ldb,
+                 const void *beta, void *C, const int ldc);
+
+void mncblas_cgemm_static(MNCBLAS_LAYOUT layout, MNCBLAS_TRANSPOSE TransA,
                  MNCBLAS_TRANSPOSE TransB, const int M, const int N,
                  const int K, const void *alpha, const void *A,
                  const int lda, const void *B, const int ldb,
@@ -266,5 +310,12 @@ void mncblas_zgemm(MNCBLAS_LAYOUT layout, MNCBLAS_TRANSPOSE TransA,
                  const int K, const void *alpha, const void *A,
                  const int lda, const void *B, const int ldb,
                  const void *beta, void *C, const int ldc);
+
+void mncblas_zgemm_static(MNCBLAS_LAYOUT layout, MNCBLAS_TRANSPOSE TransA,
+                 MNCBLAS_TRANSPOSE TransB, const int M, const int N,
+                 const int K, const void *alpha, const void *A,
+                 const int lda, const void *B, const int ldb,
+                 const void *beta, void *C, const int ldc);
+
 
 

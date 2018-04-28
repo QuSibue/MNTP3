@@ -24,7 +24,7 @@ float mncblas_sasum_static(const int N, const float* X,
   register unsigned int i;
 
   float resultat = 0;
-#pragma omp parallel for schedule(static) reduction (+:resultat)
+#pragma omp parallel for schedule(static,8) reduction (+:resultat)
   for (i=0; i < N; i += 8*incX) {
     resultat += fabs(X[i]);
     resultat += fabs(X[i+1]);
@@ -41,7 +41,7 @@ float mncblas_sasum_static(const int N, const float* X,
 double mncblas_dasum(const int N, const double *X, const int incX)
 {
   register unsigned int i = 0 ;
-  double resultat=0;
+  double resultat=0.0;
 
   for (; i < N ; i += incX)
     {
@@ -112,7 +112,7 @@ float mncblas_scasum_static(const int N, const void *X, const int incX)
 double mncblas_dzasum(const int N, const void *X, const int incX)
 {
   register unsigned int i = 0 ;
-  double resultat = 0;
+  double resultat = 0.0;
 
   for (; (i < N); i += incX)
     {
@@ -127,10 +127,10 @@ double mncblas_dzasum(const int N, const void *X, const int incX)
 double mncblas_dzasum_static(const int N, const void *X, const int incX)
 {
   register unsigned int i ;
-  double resultat = 0;
+  double resultat = 0.0;
 
 #pragma omp parallel for schedule(static) reduction (+:resultat)
-  for (i = 0 ; i < N; i += incX)
+  for (i = 0 ; i < N; i += 8*incX)
     {
       resultat += fabs( ((struct complex_double*)X)[i].real ) + fabs( ((struct complex_double*)X)[i].imaginary );
       resultat += fabs( ((struct complex_double*)X)[i+1].real ) + fabs( ((struct complex_double*)X)[i+1].imaginary );

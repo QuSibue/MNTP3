@@ -51,40 +51,29 @@ int main (int argc, char **argv)
 printf("=========================VECTEUR FLOAT================================\n");
 
   start = _rdtsc () ;
-     cblas_sgemm (MNCblasRowMajor,MNCblasNoTrans,MNCblasNoTrans,M,N,K,2.0, vecA,M,vecB,N,1.0,vecC,M) ;
+     mncblas_sgemm (MNCblasRowMajor,MNCblasNoTrans,MNCblasNoTrans,M,N,K,2.0, vecA,M,vecB,N,1.0,vecC,M) ;
   end = _rdtsc () ;
 
   m_Flops=FLOPS(1,3.4,2*VECSIZE,end-start-residu);
-  printf ("cblas_sgemm nombre de cycles cblas: %Ld \n", end-start-residu) ;
+  printf ("mncblas_sgemm nombre de cycles cblas: %Ld \n", end-start-residu) ;
 	printf ("resultat en Gflops : %f\n",m_Flops) ;
   printf("\n");
   //vector_print(vecC);
 
   start = _rdtsc () ;
-     mncblas_sgemm (MNCblasRowMajor,MNCblasNoTrans,MNCblasNoTrans,M,N,K,2.0, blvecA,M,blvecB,N,1.0,blvecC,M);
+     mncblas_sgemm_static (MNCblasRowMajor,MNCblasNoTrans,MNCblasNoTrans,M,N,K,2.0, blvecA,M,blvecB,N,1.0,blvecC,M);
   end = _rdtsc () ;
 
   m_Flops=FLOPS(1,3.4,31*M*N + 61 *M*N,end-start-residu);
-  printf ("mncblas_sgemm: nombre de cycles: %Ld \n", end-start-residu) ;
+  printf ("mncblas_sgemm_openmp: nombre de cycles: %Ld \n", end-start-residu) ;
 	printf ("resultat en Gflop : %f \n",m_Flops) ;
-  printf("\n");
-  //vector_print(blvecC);
-
-  vector_Minit (vecC, 2.0) ;
-  start = _rdtsc () ;
-     cblas_sgemm (MNCblasRowMajor,MNCblasNoTrans,MNCblasNoTrans,M,M,K,2.0, vecA,M,vecB,N,1.0,vecC,N) ;
-  end = _rdtsc () ;
-
-  m_Flops=FLOPS(1,3.4,31*M*N + 61 *M*N,end-start-residu);
-  printf ("cblas_sgemm nombre de cycles cblas: %Ld \n", end-start-residu) ;
-	printf ("resultat en Gflops : %f\n",m_Flops) ;
   printf("\n");
 
   if(comparaisonVecteurFloat(vecC,M*N,blvecC,M*N)){
-    printf ("Résultats entre cblas et mnblas identiques\n") ;
+    printf ("Résultats entre mncblas et mnblas_openmp identiques\n") ;
   }
   else{
-    printf ("Erreurs ! Résultats entre cblas et mnblas différents\n") ;
+    printf ("Erreurs ! Résultats entre mncblas et mnblas_openmp différents\n") ;
   }
 
 
@@ -103,39 +92,28 @@ printf("=========================VECTEUR FLOAT================================\n
 printf("=========================VECTEUR DOUBLE================================\n");
 
   start = _rdtsc () ;
-     cblas_dgemm (MNCblasRowMajor,MNCblasNoTrans,MNCblasNoTrans,M,N,K,2.0, vecdA,M,vecdB,N,1.0,vecdC,M) ;
+     mncblas_dgemm (MNCblasRowMajor,MNCblasNoTrans,MNCblasNoTrans,M,N,K,2.0, vecdA,M,vecdB,N,1.0,vecdC,M) ;
   end = _rdtsc () ;
 
   m_Flops=FLOPS(1,3.4,31*M*N + 61 *M*N,end-start-residu);
-  printf ("cblas_sgemm nombre de cycles cblas: %Ld \n", end-start-residu) ;
+  printf ("mncblas_sgemm nombre de cycles cblas: %Ld \n", end-start-residu) ;
 	printf ("resultat en Gflops : %f\n",m_Flops) ;
   printf("\n");
 
   start = _rdtsc () ;
-     mncblas_dgemm (MNCblasRowMajor,MNCblasNoTrans,MNCblasNoTrans,M,N,K,2.0, blvecdA,M,blvecdB,N,1.0,blvecdC,M);
+     mncblas_dgemm_static (MNCblasRowMajor,MNCblasNoTrans,MNCblasNoTrans,M,N,K,2.0, blvecdA,M,blvecdB,N,1.0,blvecdC,M);
   end = _rdtsc () ;
 
   m_Flops=FLOPS(1,3.4,31*M*N + 61 *M*N,end-start-residu);
-  printf ("mncblas_sgemm: nombre de cycles: %Ld \n", end-start-residu) ;
+  printf ("mncblas_sgemm_static: nombre de cycles: %Ld \n", end-start-residu) ;
 	printf ("resultat en Gflop : %f \n",m_Flops) ;
   printf("\n");
-  //vector_print(vec2);
-
-  vector_Minit_double (vecdC, 2.0) ;
-  start = _rdtsc () ;
-     cblas_dgemm (MNCblasRowMajor,MNCblasNoTrans,MNCblasNoTrans,M,M,K,2.0, vecdA,M,vecdB,N,1.0,vecdC,N) ;
-  end = _rdtsc () ;
-
-  m_Flops=FLOPS(1,3.4,31*M*N + 61 *M*N,end-start-residu);
-  printf ("cblas_sgemm nombre de cycles cblas: %Ld \n", end-start-residu) ;
-	printf ("resultat en Gflops : %f\n",m_Flops) ;
-  printf("\n");
-
+ 
   if(comparaisonVecteurDouble(vecdC,M*N,blvecdC,M*N)){
-    printf ("Résultats entre cblas et mnblas identiques\n") ;
+    printf ("Résultats entre mncblas et mnblas_openmp identiques\n") ;
   }
   else{
-    printf ("Erreurs ! Résultats entre cblas et mnblas différents\n") ;
+    printf ("Erreurs ! Résultats entre mncblas et mnblas_openmp différents\n") ;
   }
 
 
@@ -167,39 +145,29 @@ printf("=========================VECTEUR DOUBLE================================\
   printf("=========================VECTEUR COMPLEX_SIMPLE================================\n");
 
     start = _rdtsc () ;
-       cblas_cgemm (MNCblasRowMajor,MNCblasNoTrans,MNCblasNoTrans,M,N,K,&alphacs, veccsA,M,veccsB,N,&betacs,veccsC,M) ;
+       mncblas_cgemm (MNCblasRowMajor,MNCblasNoTrans,MNCblasNoTrans,M,N,K,&alphacs, veccsA,M,veccsB,N,&betacs,veccsC,M) ;
     end = _rdtsc () ;
 
     m_Flops=FLOPS(1,3.4,31*M*N + 61 *M*N,end-start-residu);
-    printf ("cblas_sgemm nombre de cycles cblas: %Ld \n", end-start-residu) ;
+    printf ("mncblas_sgemm nombre de cycles cblas: %Ld \n", end-start-residu) ;
   	printf ("resultat en Gflops : %f\n",m_Flops) ;
     printf("\n");
 
     start = _rdtsc () ;
-       mncblas_cgemm (MNCblasRowMajor,MNCblasNoTrans,MNCblasNoTrans,M,N,K,&alphacs, blveccsA,M,blveccsB,N,&betacs,blveccsC,M);
+       mncblas_cgemm_static (MNCblasRowMajor,MNCblasNoTrans,MNCblasNoTrans,M,N,K,&alphacs, blveccsA,M,blveccsB,N,&betacs,blveccsC,M);
     end = _rdtsc () ;
 
     m_Flops=FLOPS(1,3.4,31*M*N + 61 *M*N,end-start-residu);
-    printf ("mncblas_sgemm: nombre de cycles: %Ld \n", end-start-residu) ;
+    printf ("mncblas_sgemm_openmp: nombre de cycles: %Ld \n", end-start-residu) ;
   	printf ("resultat en Gflop : %f \n",m_Flops) ;
     printf("\n");
-    //vector_print(vec2);
 
-    vector_Minit_csimple (veccsC, c) ;
-    start = _rdtsc () ;
-       cblas_cgemm (MNCblasRowMajor,MNCblasNoTrans,MNCblasNoTrans,M,M,K,&alphacs, veccsA,M,veccsB,N,&betacs,veccsC,N) ;
-    end = _rdtsc () ;
-
-    m_Flops=FLOPS(1,3.4,31*M*N + 61 *M*N,end-start-residu);
-    printf ("cblas_sgemm nombre de cycles cblas: %Ld \n", end-start-residu) ;
-  	printf ("resultat en Gflops : %f\n",m_Flops) ;
-    printf("\n");
 
     if(comparaisonVecteurCS(veccsC,M*N,blveccsC,M*N)){
-      printf ("Résultats entre cblas et mnblas identiques\n") ;
+      printf ("Résultats entre mncblas et mnblas_openmp identiques\n") ;
     }
     else{
-      printf ("Erreurs ! Résultats entre cblas et mnblas différents\n") ;
+      printf ("Erreurs ! Résultats entre mncblas et mnblas_openmp différents\n") ;
     }
 
 
@@ -207,7 +175,7 @@ printf("=========================VECTEUR DOUBLE================================\
     printf("======================================================================\n\n");
 
 
-      printf("======================================================================\n\n");
+    printf("======================================================================\n\n");
 
       struct complex_double ads;ads.real=1.0;ads.imaginary=2.0;
       struct complex_double bds;bds.real=2.0;bds.imaginary=4.0;
@@ -232,38 +200,28 @@ printf("=========================VECTEUR DOUBLE================================\
       printf("=========================VECTEUR COMPLEX_DOUBLE================================\n");
 
         start = _rdtsc () ;
-           cblas_zgemm (MNCblasRowMajor,MNCblasNoTrans,MNCblasNoTrans,M,N,K,&alphacd, veccdA,M,veccdB,N,&betacd,veccdC,M) ;
+           mncblas_zgemm (MNCblasRowMajor,MNCblasNoTrans,MNCblasNoTrans,M,N,K,&alphacd, veccdA,M,veccdB,N,&betacd,veccdC,M) ;
         end = _rdtsc () ;
 
         m_Flops=FLOPS(1,3.4,31*M*N + 61 *M*N,end-start-residu);
-        printf ("cblas_sgemm nombre de cycles cblas: %Ld \n", end-start-residu) ;
+        printf ("mncblas_sgemm nombre de cycles cblas: %Ld \n", end-start-residu) ;
       	printf ("resultat en Gflops : %f\n",m_Flops) ;
         printf("\n");
 
         start = _rdtsc () ;
-           mncblas_zgemm (MNCblasRowMajor,MNCblasNoTrans,MNCblasNoTrans,M,N,K,&alphacd, blveccdA,M,blveccdB,N,&betacd,blveccdC,M);
+           mncblas_zgemm_static (MNCblasRowMajor,MNCblasNoTrans,MNCblasNoTrans,M,N,K,&alphacd, blveccdA,M,blveccdB,N,&betacd,blveccdC,M);
         end = _rdtsc () ;
 
         m_Flops=FLOPS(1,3.4,31*M*N + 61 *M*N,end-start-residu);
-        printf ("mncblas_sgemm: nombre de cycles: %Ld \n", end-start-residu) ;
+        printf ("mncblas_sgemm_static: nombre de cycles: %Ld \n", end-start-residu) ;
       	printf ("resultat en Gflop : %f \n",m_Flops) ;
         printf("\n");
 
-        vector_Minit_cdouble (veccdC, cds) ;
-        start = _rdtsc () ;
-           cblas_zgemm (MNCblasRowMajor,MNCblasNoTrans,MNCblasNoTrans,M,M,K,&alphacd, veccdA,M,veccdB,N,&betacd,veccdC,N) ;
-        end = _rdtsc () ;
-
-        m_Flops=FLOPS(1,3.4,31*M*N + 61 *M*N,end-start-residu);
-        printf ("cblas_sgemm nombre de cycles cblas: %Ld \n", end-start-residu) ;
-      	printf ("resultat en Gflops : %f\n",m_Flops) ;
-        printf("\n");
-
         if(comparaisonVecteurCD(veccdC,M*N,blveccdC,M*N)){
-          printf ("Résultats entre cblas et mnblas identiques\n") ;
+          printf ("Résultats entre mncblas et mnblas_openmp identiques\n") ;
         }
         else{
-          printf ("Erreurs ! Résultats entre cblas et mnblas différents\n") ;
+          printf ("Erreurs ! Résultats entre mncblas et mnblas_openmp différents\n") ;
         }
 
 

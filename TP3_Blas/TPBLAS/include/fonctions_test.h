@@ -3,10 +3,10 @@
 #include "complex.h"
 
 
-#define VECSIZE  1000000
-#define M  256
-#define N  256
-#define K  256
+#define VECSIZE 800000
+#define M 256
+#define N 256
+#define K 256
 
 
 
