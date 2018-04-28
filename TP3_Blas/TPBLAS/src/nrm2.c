@@ -1,8 +1,10 @@
+
 #include "mnblas.h"
 #include "complex.h"
 #include "math.h"
 #include <omp.h>
 #include <x86intrin.h>
+#include <stdio.h>
 
 float mncblas_snrm2(const int N,const float *X,const int incX)
 {
@@ -36,6 +38,22 @@ float mncblas_snrm2_static(const int N,const float *X,const int incX)
     return sqrt(res);
 }
 
+float mncblas_snrm2_vector(const int N,const float *X,const int incX)
+{
+  register unsigned int i = 0 ;
+  float res=0;
+	__m128 v1,v2;
+  for (i=0; i < N ; i += 4*incX)
+    {
+			v1 = _mm_load_ps(&X[i]);
+			v2 = _mm_load_ps(&X[i]);
+			v1 = _mm_mul_ps(v1,v2);
+      res+=v1[0]+v1[1]+v1[2]+v1[3];
+    }
+    return sqrt(res);
+}
+
+
 double mncblas_dnrm2(const int N,const double *X,const int incX)
 {
   register unsigned int i = 0 ;
@@ -67,6 +85,21 @@ double mncblas_dnrm2_static(const int N,const double *X,const int incX)
     return sqrt(res);
 }
 
+double mncblas_dnrm2_vector(const int N,const double *X,const int incX)
+{
+  register unsigned int i = 0 ;
+  double res=0;
+	__m128d v1,v2;
+  for (i=0; i < N ; i += 2*incX)
+    {
+			v1 = _mm_load_pd(&X[i]);
+			v2 = _mm_load_pd(&X[i]);
+			v1 = _mm_mul_pd(v1,v2);
+      res+=v1[0]+v1[1];
+    }
+    return sqrt(res);
+}
+
 float mncblas_scnrm2(const int N,const void *X,const int incX)
 {
   register unsigned int i = 0 ;
@@ -79,6 +112,25 @@ float mncblas_scnrm2(const int N,const void *X,const int incX)
     }
   return sqrt(res);
 }
+
+float mncblas_scnrm2_vector(const int N,const void *X,const int incX)
+{
+  register unsigned int i = 0 ;
+  float res=0;
+	__m128 v1,v2;
+
+	float *tabfloat = ((float*)X);
+
+  for (; (i < 2*N) ; i += 4*incX)
+    {
+			v1 = _mm_load_ps( &tabfloat[i]);
+			v2 = _mm_load_ps( &tabfloat[i]);
+			v1 = _mm_mul_ps(v1,v2);
+      res+=v1[0]+v1[1]+v1[2]+v1[3];
+    }
+  return sqrt(res);
+}
+
 
 float mncblas_scnrm2_static(const int N,const void *X,const int incX)
 {
@@ -130,6 +182,23 @@ double  mncblas_dznrm2(const int N,const void *X,const int incX)
     }
   return sqrt(res);
 }
+
+double  mncblas_dznrm2_vector(const int N,const void *X,const int incX)
+{
+  register unsigned int i = 0 ;
+  double res=0;
+	__m128d v1,v2;
+	double *doubletab = ((double*)X);
+  for (; (i < 2*N) ; i += 2*incX)
+    {
+			v1 = _mm_load_pd(&doubletab[i]);
+			v2 = _mm_load_pd(&doubletab[i]);
+			v1 = _mm_mul_pd(v1,v2);
+      res+=v1[0]+v1[1];
+    }
+  return sqrt(res);
+}
+
 
 double  mncblas_dznrm2_static(const int N,const void *X,const int incX)
 {

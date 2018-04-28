@@ -17,7 +17,6 @@ float mncblas_sasum(const int N, const float *X, const int incX)
   return resultat;
 }
 
-
 float mncblas_sasum_static(const int N, const float* X,
                 const int incX)
 {
@@ -37,6 +36,8 @@ float mncblas_sasum_static(const int N, const float* X,
   }
   return resultat;
 }
+
+
 
 double mncblas_dasum(const int N, const double *X, const int incX)
 {

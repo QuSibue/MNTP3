@@ -148,6 +148,16 @@ float mncblas_scnrm2_static(const int N,const void *X,const int incX);
 
 double  mncblas_dznrm2_static(const int N,const void *X,const int incX);
 
+//										Version Vectorisé								//
+
+float mncblas_snrm2_vector(const int N,const float *X,const int incX);
+
+double mncblas_dnrm2_vector(const int N,const double *X,const int incX);
+
+float mncblas_scnrm2_vector(const int N,const void *X,const int incX);
+
+double  mncblas_dznrm2_vector(const int N,const void *X,const int incX);
+
  /* END BLAS NRM2 */
 
 /* BLAS ASUM */
