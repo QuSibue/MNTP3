@@ -25,7 +25,6 @@ float mncblas_snrm2_static(const int N,const float *X,const int incX)
 #pragma omp parallel for schedule(static) reduction (+:res)
   for (i=0; i < N ; i += 8*incX)
     {
-
       res+=X[i]*X[i];
       res+=X[i+1]*X[i+1];
       res+=X[i+2]*X[i+2];
@@ -43,6 +42,7 @@ float mncblas_snrm2_vector(const int N,const float *X,const int incX)
   register unsigned int i = 0 ;
   float res=0;
 	__m128 v1,v2;
+#pragma omp parallel for schedule(static) reduction (+:res) private(v1,v2)
   for (i=0; i < N ; i += 4*incX)
     {
 			v1 = _mm_load_ps(&X[i]);
@@ -90,6 +90,7 @@ double mncblas_dnrm2_vector(const int N,const double *X,const int incX)
   register unsigned int i = 0 ;
   double res=0;
 	__m128d v1,v2;
+#pragma omp parallel for schedule(static) reduction (+:res) private(v1,v2)
   for (i=0; i < N ; i += 2*incX)
     {
 			v1 = _mm_load_pd(&X[i]);
@@ -121,7 +122,8 @@ float mncblas_scnrm2_vector(const int N,const void *X,const int incX)
 
 	float *tabfloat = ((float*)X);
 
-  for (; (i < 2*N) ; i += 4*incX)
+#pragma omp parallel for schedule(static) reduction (+:res) private(v1,v2)
+  for (i=0; i < 2*N ; i += 4*incX)
     {
 			v1 = _mm_load_ps( &tabfloat[i]);
 			v2 = _mm_load_ps( &tabfloat[i]);
@@ -189,7 +191,8 @@ double  mncblas_dznrm2_vector(const int N,const void *X,const int incX)
   double res=0;
 	__m128d v1,v2;
 	double *doubletab = ((double*)X);
-  for (; (i < 2*N) ; i += 2*incX)
+#pragma omp parallel for schedule(static) reduction (+:res) private(v1,v2)
+  for (i=0; i < 2*N ; i += 2*incX)
     {
 			v1 = _mm_load_pd(&doubletab[i]);
 			v2 = _mm_load_pd(&doubletab[i]);

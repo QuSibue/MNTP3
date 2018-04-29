@@ -23,7 +23,7 @@ float mncblas_sdot_static(const int N, const float *X, const int incX,
   register unsigned int i;
   register float dot = 0.0 ;
 #pragma omp parallel for schedule(static) reduction(+:dot)
-  for (i=0; i < N ; i += incX)
+  for (i=0; i < N ; i += 8*incX)
     {
       dot += X [i] * Y [i] ;
       dot += X [i+1] * Y [i+1] ;
@@ -57,7 +57,7 @@ double mncblas_ddot_static(const int N, const double *X, const int incX,
   register unsigned int i = 0 ;
   register double dot = 0.0 ;
 #pragma omp parallel for schedule(static) reduction(+:dot)
-  for (i=0; i < N; i += incX)
+  for (i=0; i < N; i += 8*incX)
     {
       dot += X [i] * Y [i] ;
       dot += X [i+1] * Y [i+1] ;

@@ -122,7 +122,7 @@ printf("=========================VECTEUR DOUBLE================================\
 printf("=========================VECTEUR COMPLEXE SIMPLE================================\n");
 
   start = _rdtsc () ;
-    cblas_cdotu_sub (VECSIZE, veccs1, 1,veccs2,1,&x3) ;
+    mncblas_cdotu_sub (VECSIZE, veccs1, 1,veccs2,1,&x3) ;
   end = _rdtsc () ;
 
   printf ("cblas_cdotu_sub: nombre de cycles: %Ld \n", end-start-residu) ;
@@ -135,7 +135,7 @@ printf("=========================VECTEUR COMPLEXE SIMPLE========================
   x3.imaginary = 0.0;
 
   start = _rdtsc () ;
-     mncblas_cdotu_sub (VECSIZE, veccs1, 1,veccs2,1,&x3);
+     mncblas_cdotu_sub_static (VECSIZE, veccs1, 1,veccs2,1,&x3);
   end = _rdtsc () ;
 
   printf ("mncblas_cdotu_sub: nombre de cycles: %Ld \n", end-start-residu) ;
@@ -167,7 +167,7 @@ printf("=========================VECTEUR COMPLEXE SIMPLE========================
 
 printf("=========================VECTEUR COMPLEXE SIMPLE================================\n");
   start = _rdtsc () ;
-     cblas_cdotc_sub(VECSIZE, veccs1, 1,veccs2,1,&y3) ;
+     mncblas_cdotc_sub(VECSIZE, veccs1, 1,veccs2,1,&y3) ;
   end = _rdtsc () ;
 
   printf ("cblas_cdotc_sub: nombre de cycles: %Ld \n", end-start-residu) ;
@@ -180,7 +180,7 @@ printf("=========================VECTEUR COMPLEXE SIMPLE========================
   y3.imaginary = 0.0;
 
   start = _rdtsc () ;
-     mncblas_cdotc_sub (VECSIZE, veccs1, 1,veccs2,1,&y3) ;
+     mncblas_cdotc_sub_static (VECSIZE, veccs1, 1,veccs2,1,&y3) ;
   end = _rdtsc () ;
 
   printf ("mncblas_cdotc_sub: nombre de cycles: %Ld \n", end-start-residu) ;
@@ -214,7 +214,7 @@ printf("=========================VECTEUR COMPLEXE SIMPLE========================
 printf("=========================VECTEUR COMPLEXE DOUBLE================================\n");
 
   start = _rdtsc () ;
-     cblas_zdotu_sub (VECSIZE, veccs1, 1,veccs2,1,&z3) ;
+     mncblas_zdotu_sub (VECSIZE, veccs1, 1,veccs2,1,&z3) ;
   end = _rdtsc () ;
 
   printf ("cblas_zdotu_sub: nombre de cycles: %Ld \n", end-start-residu) ;
@@ -224,7 +224,7 @@ printf("=========================VECTEUR COMPLEXE DOUBLE========================
   printf("\n");
 
   start = _rdtsc () ;
-     mncblas_zdotu_sub (VECSIZE, veccs1, 1,veccs2,1,&z3) ;
+     mncblas_zdotu_sub_static (VECSIZE, veccs1, 1,veccs2,1,&z3) ;
   end = _rdtsc () ;
 
   printf ("mncblas_zdotu_sub: nombre de cycles: %Ld \n", end-start-residu) ;
@@ -253,7 +253,7 @@ z3.imaginary = 0.0;
 printf("=========================VECTEUR COMPLEXE DOUBLE================================\n");
 
 start = _rdtsc () ;
-   cblas_zdotc_sub (VECSIZE, veccs1, 1,veccs2,1,&z6) ;
+   mncblas_zdotc_sub (VECSIZE, veccs1, 1,veccs2,1,&z6) ;
 end = _rdtsc () ;
 
 printf ("cblas_zdotc_sub: nombre de cycles: %Ld \n", end-start-residu) ;
@@ -263,7 +263,7 @@ printf ("resultat en Gflops : %f\n",m_Flops) ;
 printf("\n");
 
 start = _rdtsc () ;
-   mncblas_zdotc_sub (VECSIZE, veccs1, 1,veccs2,1,&z6) ;
+   mncblas_zdotc_sub_static (VECSIZE, veccs1, 1,veccs2,1,&z6) ;
 end = _rdtsc () ;
 
 printf ("mncblas_zdotc_sub: nombre de cycles: %Ld \n", end-start-residu) ;
