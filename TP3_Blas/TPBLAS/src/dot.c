@@ -100,7 +100,7 @@ void   mncblas_cdotu_sub_static(const int N, const void *X, const int incX,
   float imaginary = 0;
 
 #pragma omp parallel for schedule(static) reduction(+: real , imaginary)
-  for (i=0; i < N ; i += incX)
+  for (i=0; i < N ; i += 8*incX)
     {
       real +=( ( ((struct complex_simple*)X)[i].real * ((struct complex_simple*)Y)[i].real ) - ( ((struct complex_simple*)X)[i].imaginary * ((struct complex_simple*)Y)[i].imaginary) ) ;
 

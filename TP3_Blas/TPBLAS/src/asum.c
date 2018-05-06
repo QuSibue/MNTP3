@@ -23,7 +23,7 @@ float mncblas_sasum_static(const int N, const float* X,
   register unsigned int i;
 
   float resultat = 0;
-#pragma omp parallel for schedule(static,8) reduction (+:resultat)
+#pragma omp parallel for reduction (+:resultat)
   for (i=0; i < N; i += 8*incX) {
     resultat += fabs(X[i]);
     resultat += fabs(X[i+1]);
@@ -36,8 +36,6 @@ float mncblas_sasum_static(const int N, const float* X,
   }
   return resultat;
 }
-
-
 
 double mncblas_dasum(const int N, const double *X, const int incX)
 {

@@ -36,10 +36,8 @@ struct complex_simple multiplication_cs(struct complex_simple c1,
                                          struct complex_simple c2) {
 
   struct complex_simple c;
-  // partie real = x.real*y.rel - x.img*y.img
 
   c.real = c1.real * c2.real - c1.imaginary * c2.imaginary;
-  // partie img = x.real*y.img + x.img*y.real
 
   c.imaginary = c1.real * c2.imaginary + c1.imaginary * c2.real;
   return c;

@@ -36,7 +36,7 @@ void mncblas_sgemv_static (const MNCBLAS_LAYOUT layout,
   register unsigned int j;
 
   float tmp ;
-#pragma omp parallel for schedule(static) reduction(+:tmp)
+#pragma omp parallel for schedule(static) reduction(+:tmp) private(j)
   for (i = 0 ; i < M ; i += incX) {
     tmp = A[i*N] * X[0] ;
     for (j=1; j < N ;j += incY) {
@@ -81,7 +81,7 @@ void mncblas_dgemv_static (MNCBLAS_LAYOUT layout,
   register unsigned int j;
 
   double tmp ;
-#pragma omp parallel for schedule(static) reduction(+:tmp)
+#pragma omp parallel for schedule(static) reduction(+:tmp) private(j)
   for (i = 0 ; i < M ; i += incX) {
     tmp = A[i*N] * X[0] ;
     for (j=1; j < N ;j += incY) {
@@ -135,7 +135,7 @@ void mncblas_cgemv_static (MNCBLAS_LAYOUT layout,
 	register float imaginary;
 
 
-#pragma omp parallel for schedule(static) reduction(+:real,imaginary)
+#pragma omp parallel for schedule(static) reduction(+:real,imaginary) private(j)
   for (i = 0 ; i < M ; i += incX) {
     real = multiplication_cs( ((struct complex_simple*)A)[i*N] , ((struct complex_simple*)X)[0] ).real;
     imaginary = multiplication_cs( ((struct complex_simple*)A)[i*N] , ((struct complex_simple*)X)[0] ).imaginary;
@@ -193,7 +193,7 @@ void mncblas_zgemv_static (MNCBLAS_LAYOUT layout,
 	register double real;
 	register double imaginary;
 
-#pragma omp parallel for schedule(static) reduction(+:real,imaginary)
+#pragma omp parallel for schedule(static) reduction(+:real,imaginary) private(j)
   for (i = 0 ; i < M ; i += incX) {
     real = multiplication_cd( ((struct complex_double*)A)[i*N] , ((struct complex_double*)X)[0] ).real;
     imaginary = multiplication_cd( ((struct complex_double*)A)[i*N] , ((struct complex_double*)X)[0] ).imaginary;

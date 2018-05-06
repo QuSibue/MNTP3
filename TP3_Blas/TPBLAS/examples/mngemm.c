@@ -58,7 +58,6 @@ printf("=========================VECTEUR FLOAT================================\n
   printf ("mncblas_sgemm nombre de cycles cblas: %Ld \n", end-start-residu) ;
 	printf ("resultat en Gflops : %f\n",m_Flops) ;
   printf("\n");
-  //vector_print(vecC);
 
   start = _rdtsc () ;
      mncblas_sgemm_static (MNCblasRowMajor,MNCblasNoTrans,MNCblasNoTrans,M,N,K,2.0, blvecA,M,blvecB,N,1.0,blvecC,M);

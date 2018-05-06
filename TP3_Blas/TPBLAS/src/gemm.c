@@ -44,7 +44,7 @@ void mncblas_sgemm_static(MNCBLAS_LAYOUT layout, MNCBLAS_TRANSPOSE TransA,
 
 	register float temp;
 
-#pragma omp parallel for schedule(static) reduction(+:temp)
+#pragma omp parallel for schedule(static) reduction(+:temp) private(j,g)
 	for (i=0;i<M;i++){
 		for (j=0;j<N;j++){
 			temp =  A[i*K+0] * B[0*K+j] ;
@@ -97,7 +97,7 @@ void mncblas_dgemm_static(MNCBLAS_LAYOUT layout, MNCBLAS_TRANSPOSE TransA,
 
 	register double temp;
 
-#pragma omp parallel for schedule(static) reduction(+:temp)
+#pragma omp parallel for schedule(static) reduction(+:temp) private(j,g)
 	for (i=0;i<M;i++){
 		for (j=0;j<N;j++){
 			temp =  A[i*K+0] * B[0*K+j] ;
@@ -156,7 +156,7 @@ void mncblas_cgemm_static(MNCBLAS_LAYOUT layout, MNCBLAS_TRANSPOSE TransA,
 									register float real;
 									register float imaginary;
 
-#pragma omp parallel for schedule(static) reduction(+:real,imaginary)
+#pragma omp parallel for schedule(static) reduction(+:real,imaginary) private(j,g)
                  	for (i=0;i<M;i++){
                  		for (j=0;j<N;j++){
                  			real =  multiplication_cs( ((struct complex_simple*)A)[i*K+0], ((struct complex_simple*)B)[0*K+j] ).real;
@@ -223,7 +223,7 @@ void mncblas_zgemm_static(MNCBLAS_LAYOUT layout, MNCBLAS_TRANSPOSE TransA,
 									register double imaginary;
 	
 
-#pragma omp parallel for schedule(static) reduction(+:real,imaginary)
+#pragma omp parallel for schedule(static) reduction(+:real,imaginary) private(j,g)
                  	for (i=0;i<M;i++){
                  		for (j=0;j<N;j++){
                  			real =  multiplication_cd( ((struct complex_double*)A)[i*K+0], ((struct complex_double*)B)[0*K+j] ).real;
